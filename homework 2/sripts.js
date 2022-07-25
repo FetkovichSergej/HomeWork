@@ -1,4 +1,3 @@
-/*
 let name1;
 let age;
 let city;
@@ -29,7 +28,7 @@ if (number[0] + number[1] + number[2] == number[3] + number[4] + number[5]) {
 } else {
     alert("Нет");
 }
-*/
+
 let c, number;
 c = prompt(`Введите число`);
 if (c > 0) {
