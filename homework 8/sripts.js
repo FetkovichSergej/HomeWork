@@ -2,9 +2,6 @@ let body;
 let div;
 let header;
 let header_sub_title;
-let main;
-let freelancer;
-let studio;
 window.onload = () => {
     createHeaderElements();
     createMainElements();
@@ -23,9 +20,13 @@ function createHeaderElements() {
     div.classList.add("header");
 }
 function createMainElements() {
-    main = document.createElement("main");
+    const main = document.createElement("main");
     body.appendChild(main);
-    freelancer = document.createElement("div");
+    createFreelancerElement(main);
+    createStudioElement(main);
+}
+function createFreelancerElement(element) {
+    const freelancer = document.createElement("div");
     freelancer.append(
         document.createElement("p"),
         document.createElement("h1"),
@@ -37,9 +38,11 @@ function createMainElements() {
         "But I must explain to you how all this<br>mistaken idea of denouncing ";
     freelancer.querySelector("h1").innerHTML = "Initially<br>designed to";
     freelancer.querySelector("button").innerText = "Start Here";
-    main.appendChild(freelancer);
+    element.appendChild(freelancer);
     freelancer.classList.add("freelancer");
-    studio = document.createElement("div");
+}
+function createStudioElement(element) {
+    const studio = document.createElement("div");
     studio.append(
         document.createElement("p"),
         document.createElement("h1"),
@@ -52,6 +55,6 @@ function createMainElements() {
     studio.querySelector("h1").innerHTML = "Initially<br>designed to";
     studio.querySelector("button").innerText = "Start Here";
 
-    main.appendChild(studio);
+    element.appendChild(studio);
     studio.classList.add("studio");
 }
