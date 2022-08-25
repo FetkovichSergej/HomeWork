@@ -1,0 +1,15 @@
+ul {
+    display: flex;
+}
+ul li {
+    width: fit-content;
+    height: fit-content;
+}
+
+.checked_task span {
+    text-decoration: line-through;
+}
+
+.checked_task {
+    background-color: green;
+}
