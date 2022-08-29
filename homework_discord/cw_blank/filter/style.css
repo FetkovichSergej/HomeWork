@@ -1,0 +1,70 @@
+body {
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-family: Arial;
+}
+
+.btn_hide {
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn_hide:hover {
+    background-color: aliceblue;
+}
+
+.btn_hide:focus {
+    background-color: gray;
+    color: white;
+}
+
+.nature_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 30px;
+}
+
+.nature_content div {
+    padding: 8px;
+    background-color: white;
+}
+.nature_content div img {
+    width: 220px;
+    height: 220px;
+}
+.car_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 30px;
+}
+.car_content div {
+    padding: 8px;
+    background-color: white;
+}
+.car_content div img {
+    width: 220px;
+    height: 220px;
+}
+
+.people_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 30px;
+}
+.people_content div {
+    padding: 8px;
+    background-color: white;
+}
+.people_content div img {
+    width: 220px;
+    height: 220px;
+}

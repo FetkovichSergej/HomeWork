@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./styles.css" />
+        <script src="./gallery.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div style="text-align: center">
+            <h2>Tabbed Image Gallery</h2>
+            <p>Click on the images below:</p>
+        </div>
+        <div class="galery">
+            <img
+                src="/images_for_galery/amogus.jpg"
+                alt="amogus"
+                onclick="expandImage(this)"
+            />
+            <img
+                src="/images_for_galery/brawlstars.jpg"
+                alt="brawlstars"
+                onclick="expandImage(this)"
+            />
+            <img
+                src="/images_for_galery/pepe.png"
+                alt="pepe"
+                onclick="expandImage(this)"
+            />
+            <img
+                src="/images_for_galery/squid.jpg"
+                alt="squid"
+                onclick="expandImage(this)"
+            />
+        </div>
+        <div class="img_on_click">
+            <span
+                id="cancel"
+                onclick="this.parentElement.style.display='none'"
+                class="closebtn"
+                >&times;</span
+            >
+            <img id="expandedimg" class="expandedimg" />
+            <div id="imgtext"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./sripts.js"></script>
+        <title>Filter</title>
+    </head>
+    <body>
+        <header>
+            <h1>MYLOGO.COM</h1>
+            <hr />
+            <h2>PORTFOLIO</h2>
+            <div class="button_holder">
+                <button
+                    class="btn_hide"
+                    onclick="show_all('nature_content','car_content', 'people_content')"
+                >
+                    Show all
+                </button>
+                <button
+                    class="btn_hide"
+                    onclick="show('nature_content','car_content', 'people_content')"
+                >
+                    Nature
+                </button>
+                <button
+                    class="btn_hide"
+                    onclick="show('car_content','nature_content','people_content')"
+                >
+                    Cars
+                </button>
+                <button
+                    class="btn_hide"
+                    onclick="show('people_content','car_content','nature_content')"
+                >
+                    People
+                </button>
+            </div>
+        </header>
+        <main>
+            <div class="nature_content">
+                <div>
+                    <img src="./images/nature.jpg" />
+                    <h2>Forest</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/mountains.jpg" />
+                    <h2>Mountains</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/lights.jpg" />
+                    <h2>Lights</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+            </div>
+            <div class="car_content">
+                <div>
+                    <img src="./images/cars1.jpg" />
+                    <h2>Retro</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/cars2.jpg" />
+                    <h2>Fast</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/cars3.jpg" />
+                    <h2>Classic</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+            </div>
+            <div class="people_content">
+                <div>
+                    <img src="./images/people1.jpg" />
+                    <h2>Girl</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/people2.jpg" />
+                    <h2>Man</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+                <div>
+                    <img src="./images/people3.jpg" />
+                    <h2>Woman</h2>
+                    <p>Lorem, ipsum dolor...</p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: #ededed;
+}
+
+.galery {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    flex-direction: row;
+    width: 100%;
+}
+
+.galery img {
+    width: 25%;
+    height: 25%;
+    padding-left: 1%;
+}
+
+.img_in_click {
+    display: none;
+    position: relative;
+}
+
+#imgtext {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    bottom: -115px;
+    left: 65px;
+}
+.closebtn {
+    position: absolute;
+    color: black;
+    font-size: 35px;
+    cursor: pointer;
+    left: 582px;
+}
+.expandedimg {
+    width: 50%;
+    height: 20%;
+}
