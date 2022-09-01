@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Калькулятор</title>
+    </head>
+    <body>
+        <script src="./sripts.js"></script>
+        <p>Включить калькулятор?</p>
+        <button onclick="test.on()">Включить</button>
+        <button onclick="test.off()">Выключить</button>
+        <div class="CalcSimpleNumbers" id="calc">
+            <p>Простой Калькулятор</p>
+            <!-- поле ввода первого числа -->
+            <input id="num1" />
+
+            <!-- блок с кнопками -->
+            <div id="operator_btns">
+                <button id="plus" onclick="test.op = '+'">+</button>
+                <button id="minus" onclick="test.op = '-'">-</button>
+                <button id="times" onclick="test.op = '*'">x</button>
+                <button id="divide" onclick="test.op = '/'">:</button>
+            </div>
+
+            <!-- поле ввода второго числа -->
+            <input id="num2" />
+            <br />
+            <button onclick="test.func()">Посчитать</button>;
+            <p id="result"></p>
+        </div>
+        <div class="Expresion_calc" id="calexp">
+            <p>Калькулятор выражений</p>
+            <input id="expresion" />
+            <button onclick="test2.calculate()">Посчитать</button>
+            <p id="resultex"></p>
+        </div>
+    </body>
+</html>
