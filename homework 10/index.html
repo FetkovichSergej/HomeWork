@@ -10,14 +10,17 @@
     <body>
         <script src="./sripts.js"></script>
         <p>Включить калькулятор?</p>
-        <button onclick="test.on()">Включить</button>
-        <button onclick="test.off()">Выключить</button>
+        <div id="On_Off">
+            <button onclick="test.on()">Включить</button>
+            <button onclick="test.off()">Выключить</button>
+            <button id="off">тест</button>
+        </div>
         <div class="CalcSimpleNumbers" id="calc">
             <p>Простой Калькулятор</p>
             <!-- поле ввода первого числа -->
             <input id="num1" />
 
-            <!-- блок с кнопками -->
+            <!-- блок с кнопками test.search('#operator_btns1','#plus')-->
             <div id="operator_btns">
                 <button id="plus" onclick="test.op = '+'">+</button>
                 <button id="minus" onclick="test.op = '-'">-</button>
