@@ -34,16 +34,17 @@ class Contacts {
     add(obj) {
         let user = new Users(obj);
         this.data.push(user);
-        console.log(this.data);
     }
     edit(id, obj) {
-        let user = this.data.find((item) => item.id == id);
+        let user = this.data.find((item) => item.data.id == id);
         if (user !== undefined) {
             user.edit(obj);
         }
     }
     remove(id) {
-        let user = this.data.findIndex((item) => item.id == id);
+        console.log(id);
+        let user = this.data.findIndex((item) => item.data.id === id);
+        console.log(user);
         if (user !== -1) {
             this.data.splice(user, 1);
         }
@@ -58,8 +59,10 @@ class ContactsApp extends Contacts {
         super();
         this.app = document.createElement("div");
         this.app.classList.add("contacts");
+        this.list = document.createElement("div");
+        this.list.id = "UsersList";
         this.createUserForm();
-        document.body.appendChild(this.app);
+        document.body.append(this.app, this.list);
     }
     createUserForm() {
         this.app.append(
@@ -68,6 +71,7 @@ class ContactsApp extends Contacts {
             this.createUserFormInput("email", "email", "Введите email"),
             this.createUserFormInput("address", "text", "Введите адрес"),
             this.createUserFormInput("phone", "tel", "Введите номер телефона"),
+            document.createElement("br"),
             this.createButton(this.onAdd.bind(this), "Добавить")
         );
     }
@@ -96,5 +100,47 @@ class ContactsApp extends Contacts {
             phone: document.getElementById("phone").value,
         };
         this.add(userData);
+        this.buildUserList();
+    }
+
+    addUserToList(user) {
+        const data = user.get();
+        const userContainer = document.createElement("div");
+        const userID = document.createElement("span");
+        userID.innerText = `ID:${data.id} `;
+        const userName = document.createElement("span");
+        userName.innerText = `Имя пользователя:${data.name} `;
+        const userEmail = document.createElement("span");
+        userEmail.innerText = `Email:${data.email} `;
+        const userAddress = document.createElement("span");
+        userAddress.innerText = `Адресс:${data.address} `;
+        const userPhone = document.createElement("span");
+        userPhone.innerText = `Телефон:${data.phone} `;
+        const removeButton = document.createElement("button");
+        removeButton.onclick = this.onRemove.bind(this, data.id);
+        removeButton.innerText = "Удалить";
+        userContainer.append(
+            userID,
+            userName,
+            userEmail,
+            userAddress,
+            userPhone,
+            removeButton
+        );
+        this.list.append(userContainer);
+    }
+    buildUserList() {
+        this.list.innerHTML = "";
+        for (let index = 0; index < this.data.length; index++) {
+            this.addUserToList(this.data[index]);
+        }
+    }
+    changeUser() {}
+
+    onRemove(id) {
+        console.log(id);
+        this.remove(id);
+        console.log(this.data[0]);
+        this.buildUserList();
     }
 }
