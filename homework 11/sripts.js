@@ -1,5 +1,15 @@
+const selectors = {
+    idInput: "user-id-input",
+    nameInput: "user-name-input",
+    emailInput: "user-email-input",
+    addressInput: "user-address-input",
+    phoneInput: "user-phone-input",
+    confirmButton: "user-confirm-button",
+    editButton: "user-edit-button",
+};
+let primer;
 window.onload = () => {
-    const primer = new ContactsApp();
+    primer = new ContactsApp();
 };
 class Users {
     constructor(data) {
@@ -42,9 +52,7 @@ class Contacts {
         }
     }
     remove(id) {
-        console.log(id);
         let user = this.data.findIndex((item) => item.data.id === id);
-        console.log(user);
         if (user !== -1) {
             this.data.splice(user, 1);
         }
@@ -55,6 +63,22 @@ class Contacts {
 }
 
 class ContactsApp extends Contacts {
+    get usersData() {
+        const usersList = JSON.parse(localStorage.getItem("Users"));
+        const arrayUsers = [];
+        for (let index = 0; index < usersList.length; index++) {
+            arrayUsers.push(new Users(usersList[index].data));
+        }
+        return arrayUsers;
+    }
+
+    set usersData(obj) {
+        localStorage.setItem("Users", JSON.stringify(obj));
+        let date = new Date(Date.now() + 8.64e8);
+        date = date.toUTCString();
+        document.cookie = "User=Alex;expires=" + date;
+    }
+
     constructor() {
         super();
         this.app = document.createElement("div");
@@ -63,6 +87,8 @@ class ContactsApp extends Contacts {
         this.list.id = "UsersList";
         this.createUserForm();
         document.body.append(this.app, this.list);
+        this.data = this.usersData;
+        this.buildUserList();
     }
     createUserForm() {
         this.app.append(
@@ -101,31 +127,54 @@ class ContactsApp extends Contacts {
         };
         this.add(userData);
         this.buildUserList();
+        this.usersData = this.data;
     }
 
     addUserToList(user) {
         const data = user.get();
         const userContainer = document.createElement("div");
-        const userID = document.createElement("span");
-        userID.innerText = `ID:${data.id} `;
-        const userName = document.createElement("span");
-        userName.innerText = `Имя пользователя:${data.name} `;
-        const userEmail = document.createElement("span");
-        userEmail.innerText = `Email:${data.email} `;
-        const userAddress = document.createElement("span");
-        userAddress.innerText = `Адресс:${data.address} `;
-        const userPhone = document.createElement("span");
-        userPhone.innerText = `Телефон:${data.phone} `;
+        userContainer.id = `user-${data.id}`;
+        const userID = document.createElement("input");
+        userID.classList.add(selectors.idInput);
+        userID.disabled = true;
+        userID.value = data.id;
+        const userName = document.createElement("input");
+        userName.classList.add(selectors.nameInput);
+        userName.disabled = true;
+        userName.value = data.name;
+        const userEmail = document.createElement("input");
+        userEmail.classList.add(selectors.emailInput);
+        userEmail.disabled = true;
+        userEmail.value = data.email;
+        const userAddress = document.createElement("input");
+        userAddress.classList.add(selectors.addressInput);
+        userAddress.disabled = true;
+        userAddress.value = data.address;
+        const userPhone = document.createElement("input");
+        userPhone.classList.add(selectors.phoneInput);
+        userPhone.disabled = true;
+        userPhone.value = data.phone;
         const removeButton = document.createElement("button");
         removeButton.onclick = this.onRemove.bind(this, data.id);
         removeButton.innerText = "Удалить";
+        const editButton = document.createElement("button");
+        editButton.onclick = this.startEdit.bind(this, `user-${data.id}`);
+        editButton.innerText = "Изменить";
+        editButton.classList.add(selectors.editButton);
+        const confirmButton = document.createElement("button");
+        confirmButton.innerText = "Подтвердить";
+        confirmButton.disabled = true;
+        confirmButton.classList.add(selectors.confirmButton);
+        confirmButton.onclick = this.onEdit.bind(this, data.id);
         userContainer.append(
             userID,
             userName,
             userEmail,
             userAddress,
             userPhone,
-            removeButton
+            removeButton,
+            editButton,
+            confirmButton
         );
         this.list.append(userContainer);
     }
@@ -135,12 +184,68 @@ class ContactsApp extends Contacts {
             this.addUserToList(this.data[index]);
         }
     }
-    changeUser() {}
 
     onRemove(id) {
-        console.log(id);
         this.remove(id);
-        console.log(this.data[0]);
         this.buildUserList();
+        this.usersData = this.data;
+    }
+    startEdit(id) {
+        document.querySelector(`#${id} .${selectors.idInput}`).disabled = false;
+        document.querySelector(
+            `#${id} .${selectors.nameInput}`
+        ).disabled = false;
+        document.querySelector(
+            `#${id} .${selectors.phoneInput}`
+        ).disabled = false;
+        document.querySelector(
+            `#${id} .${selectors.addressInput}`
+        ).disabled = false;
+        document.querySelector(
+            `#${id} .${selectors.emailInput}`
+        ).disabled = false;
+        document.querySelector(
+            `#${id} .${selectors.editButton}`
+        ).disabled = true;
+        document.querySelector(
+            `#${id} .${selectors.confirmButton}`
+        ).disabled = false;
+    }
+    onEdit(id) {
+        const idInput = document.querySelector(
+            `#user-${id} .${selectors.idInput}`
+        );
+        const nameInput = document.querySelector(
+            `#user-${id} .${selectors.nameInput}`
+        );
+        const phoneInput = document.querySelector(
+            `#user-${id} .${selectors.phoneInput}`
+        );
+        const addressInput = document.querySelector(
+            `#user-${id} .${selectors.addressInput}`
+        );
+        const emailInput = document.querySelector(
+            `#user-${id} .${selectors.emailInput}`
+        );
+        const userData = {
+            id: idInput.value,
+            name: nameInput.value,
+            email: emailInput.value,
+            address: addressInput.value,
+            phone: phoneInput.value,
+        };
+        idInput.disabled = true;
+        nameInput.disabled = true;
+        emailInput.disabled = true;
+        addressInput.disabled = true;
+        phoneInput.disabled = true;
+        this.edit(id, userData);
+        document.querySelector(
+            `#user-${id} .${selectors.editButton}`
+        ).disabled = false;
+        document.querySelector(
+            `#user-${id} .${selectors.confirmButton}`
+        ).disabled = true;
+        this.usersData = this.data;
     }
 }
