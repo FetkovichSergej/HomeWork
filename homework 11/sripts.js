@@ -11,6 +11,7 @@ let primer;
 window.onload = () => {
     primer = new ContactsApp();
 };
+
 class Users {
     constructor(data) {
         this.data = {
@@ -63,13 +64,18 @@ class Contacts {
 }
 
 class ContactsApp extends Contacts {
-    get usersData() {
-        const usersList = JSON.parse(localStorage.getItem("Users"));
-        const arrayUsers = [];
-        for (let index = 0; index < usersList.length; index++) {
-            arrayUsers.push(new Users(usersList[index].data));
+    usersDataAp() {
+        if (localStorage.getItem("Users") !== null) {
+            let usersList = [];
+            usersList = JSON.parse(localStorage.getItem("Users"));
+            for (let index = 0; index < usersList.length; index++) {
+                console.log(usersList[index].data);
+                this.data.push(new Users(usersList[index].data));
+            }
+            this.buildUserList();
+        } else {
+            this.getData();
         }
-        return arrayUsers;
     }
 
     set usersData(obj) {
@@ -87,8 +93,7 @@ class ContactsApp extends Contacts {
         this.list.id = "UsersList";
         this.createUserForm();
         document.body.append(this.app, this.list);
-        this.data = this.usersData;
-        this.buildUserList();
+        this.usersDataAp();
     }
     createUserForm() {
         this.app.append(
@@ -247,5 +252,17 @@ class ContactsApp extends Contacts {
             `#user-${id} .${selectors.confirmButton}`
         ).disabled = true;
         this.usersData = this.data;
+    }
+
+    getData() {
+        fetch("https://jsonplaceholder.typicode.com/users")
+            .then((response) => response.json())
+            .then((arrayJson) => {
+                console.log(arrayJson);
+                for (let index = 0; index < arrayJson.length; index++) {
+                    this.data.push(new Users(arrayJson[index]));
+                }
+                this.buildUserList();
+            });
     }
 }
